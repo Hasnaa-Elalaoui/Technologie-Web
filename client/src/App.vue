@@ -1,22 +1,51 @@
 <template>
-  <div id="app">
-    <router-link to="/">[Home]</router-link>
-    <router-link to="/restaurant">[Détail d'un restaurant]</router-link>
-    <router-link to="/hello">[HelloWorld]</router-link>
-    <router-view ></router-view>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="./assets/miage.png"
+          transition="scale-transition"
+          width="200"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <ListeDesRestaurants/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
+import ListeDesRestaurants from './components/ListeDesRestaurants';
 
 export default {
   name: 'App',
+
   components: {
-    
-  }
-}
+    ListeDesRestaurants,
+  },
+
+  data: () => ({
+    //
+  }),
+};
 </script>
-
-<style>
-
-</style>

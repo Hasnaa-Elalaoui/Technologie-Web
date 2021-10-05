@@ -7,6 +7,7 @@ import VueRouter from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import ListeDesRestaurants from './components/ListeDesRestaurants.vue'
 import Restaurant from './components/Restaurant.vue'
+import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 Vue.use(VueMaterial)
@@ -36,5 +37,6 @@ const router = new VueRouter({
 });
 new Vue({
   router,
-  render: h => h(App),
+  vuetify,
+  render: h => h(App)
 }).$mount('#app')
