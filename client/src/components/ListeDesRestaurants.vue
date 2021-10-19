@@ -1,4 +1,5 @@
 <template>
+<!-- Début bannière -->
   <div>
     <v-card class="overflow-hidden">
     <v-app-bar
@@ -38,8 +39,10 @@
         
           <v-text-field class="recherche"
             v-model="nomRestauRecherche"
-            label="Regular"
+            label="Recherche"
             clearable
+            @input="chercherRestaurant()"
+            type="text"
           ></v-text-field>
     
         <v-icon class="search-button">mdi-magnify</v-icon>
@@ -62,11 +65,15 @@
       <v-container style="height: 1000px;"></v-container>
     </v-sheet>
   </v-card>
+  <!-- Fin bannière -->
+
+<!-- Début ajout restaurant -->
+<div class="ajoutRestau">
     <form v-on:submit.prevent="ajouterRestaurant(event)">
       <label class="espaceAjoutResto">
         Nom :
         <v-text-field
-          class="ajoutResto"
+          class="ajoutRestoTextField"
           v-model="nom"
           label="Saisir le nom du restaurant"
           outlined
@@ -76,7 +83,7 @@
       <label class="espaceAjoutResto">
         Cuisine :
         <v-text-field
-          class="ajoutResto"
+          class="ajoutRestoTextField"
           v-model="cuisine"
           label="Saisir la cuisine"
           outlined
@@ -86,17 +93,19 @@
 
       <md-button class="md-raised"> Ajouter </md-button>
     </form>
+    </div>
+    <!-- Fin ajout restaurant -->
 
     <h1>Nombre de restaurants : {{ nbRestaurantsTotal }}</h1>
     
-    <p>
+    <!-- En commentaire car la recherche du haut de page marche (apparement)<p>
       Chercher par nom :
       <input
         @input="chercherRestaurant()"
         type="text"
         v-model="nomRestauRecherche"
       />
-    </p>
+    </p> -->
     <p>Nombre total de pages : {{ nbPagesTotal }}</p>
     <!-- Slider -->
     <p>
@@ -137,6 +146,9 @@
         }}</md-table-cell>
         <md-table-cell md-label="Cuisine" md-sort-by="cuisine">{{
           item.cuisine
+        }}</md-table-cell>
+        <md-table-cell md-label="Ville" md-sort-by="borough">{{
+          item.borough
         }}</md-table-cell>
         <md-table-cell md-label="Action">
           <router-link :to="'/restaurant/' + item._id"
@@ -304,10 +316,12 @@ h1 {
 .search-button{
   margin-top: 0%;
 }
-.ajoutResto {
+.ajoutRestoTextField {
   display: inline-block;
 }
 .espaceAjoutResto {
   margin-right: 1%;
 }
+
+.ajoutRestau{margin-top: 2%; margin-left: 1%;}
 </style>
