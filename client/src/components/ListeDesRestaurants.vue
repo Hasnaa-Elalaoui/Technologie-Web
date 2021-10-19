@@ -1,5 +1,67 @@
 <template>
   <div>
+    <v-card class="overflow-hidden">
+    <v-app-bar
+      absolute
+      color="#6A76AB"
+      dark
+      shrink-on-scroll
+      prominent
+      src="../assets/restaurant-interieur.jpeg"
+      fade-img-on-scroll
+      scroll-target="#scrolling-techniques-3"
+    >
+      <template v-slot:img="{ props }">
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(100,115,201,.3), rgba(25,32,72,.4)" 
+        ></v-img>
+      </template>
+
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-menu offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn color="primary" dark v-bind="attrs" v-on="on"> Menu </v-btn>
+      </template>
+      <v-list>
+        <v-list-item v-for="(item, index) in items" :key="index">
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+
+      <v-app-bar-title class="title">Bienvenue au Paradis du Restaurant</v-app-bar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon class="search-container">
+        
+          <v-text-field class="recherche"
+            v-model="nomRestauRecherche"
+            label="Regular"
+            clearable
+          ></v-text-field>
+    
+        <v-icon class="search-button">mdi-magnify</v-icon>
+      </v-btn>
+
+
+      <template v-slot:extension>
+        <v-tabs align-with-title>
+          <v-tab>Tab 1</v-tab>
+          <v-tab>Tab 2</v-tab>
+          <v-tab>Tab 3</v-tab>
+        </v-tabs>
+      </template>
+    </v-app-bar>
+    <v-sheet
+      id="scrolling-techniques-3"
+      class="overflow-y-auto"
+      max-height="220"
+    >
+      <v-container style="height: 1000px;"></v-container>
+    </v-sheet>
+  </v-card>
     <form v-on:submit.prevent="ajouterRestaurant(event)">
       <label>
         Nom : <input name="nom" type="text" required v-model="nom" />
@@ -13,6 +75,7 @@
     </form>
 
     <h1>Nombre de restaurants : {{ nbRestaurantsTotal }}</h1>
+    
     <p>
       Chercher par nom :
       <input
@@ -49,18 +112,24 @@
     </md-button>
     &nbsp; Page courante : {{ page }}
     <br />
-    <md-table v-model="restaurants" md-sort="name" md-sort-order="asc" >
-      <md-table-row >
+    <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
+      <md-table-row>
         <md-table-head>Nom</md-table-head>
         <md-table-head>Cuisine</md-table-head>
       </md-table-row>
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Cuisine" md-sort-by="cuisine">{{ item.cuisine }}</md-table-cell>
-        <md-table-cell md-label="Action" >
-            <router-link :to="'/restaurant/'+item._id">[Détail d'un restaurant]</router-link>
-            </md-table-cell>
+        <md-table-cell md-label="Name" md-sort-by="name">{{
+          item.name
+        }}</md-table-cell>
+        <md-table-cell md-label="Cuisine" md-sort-by="cuisine">{{
+          item.cuisine
+        }}</md-table-cell>
+        <md-table-cell md-label="Action">
+          <router-link :to="'/restaurant/' + item._id"
+            >[Détail d'un restaurant]</router-link
+          >
+        </md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -81,6 +150,13 @@ export default {
       pageSize: 10,
       nbPagesTotal: 0,
       nomRestauRecherche: "",
+
+      items: [
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me 2" },
+      ],
     };
   },
   mounted() {
@@ -195,5 +271,20 @@ export default {
 <style scoped>
 h1 {
   background-color: yellow;
+}
+.title{
+  font-size: 2%;
+}
+
+.recherche{
+  margin-left: -120px;
+}
+
+/* .search-container{
+  margin-top: 2%;
+} */
+
+.search-button{
+  margin-top: 0%;
 }
 </style>
