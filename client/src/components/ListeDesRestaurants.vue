@@ -1,15 +1,28 @@
 <template>
   <div>
     <form v-on:submit.prevent="ajouterRestaurant(event)">
-      <label>
-        Nom : <input name="nom" type="text" required v-model="nom" />
+      <label class="espaceAjoutResto">
+        Nom :
+        <v-text-field
+          class="ajoutResto"
+          v-model="nom"
+          label="Saisir le nom du restaurant"
+          outlined
+          clearable
+        ></v-text-field>
       </label>
-      <label>
+      <label class="espaceAjoutResto">
         Cuisine :
-        <input name="cuisine" type="text" required v-model="cuisine" />
+        <v-text-field
+          class="ajoutResto"
+          v-model="cuisine"
+          label="Saisir la cuisine"
+          outlined
+          clearable
+        ></v-text-field>
       </label>
 
-      <button>Ajouter</button>
+      <md-button class="md-raised"> Ajouter </md-button>
     </form>
 
     <h1>Nombre de restaurants : {{ nbRestaurantsTotal }}</h1>
@@ -49,18 +62,26 @@
     </md-button>
     &nbsp; Page courante : {{ page }}
     <br />
-    <md-table v-model="restaurants" md-sort="name" md-sort-order="asc" >
-      <md-table-row >
+    <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
+      <md-table-row>
         <md-table-head>Nom</md-table-head>
         <md-table-head>Cuisine</md-table-head>
       </md-table-row>
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Cuisine" md-sort-by="cuisine">{{ item.cuisine }}</md-table-cell>
-        <md-table-cell md-label="Action" >
-            <router-link :to="'/restaurant/'+item._id">[Détail d'un restaurant]</router-link>
-            </md-table-cell>
+        <md-table-cell md-label="Name" md-sort-by="name">{{
+          item.name
+        }}</md-table-cell>
+        <md-table-cell md-label="Cuisine" md-sort-by="cuisine">{{
+          item.cuisine
+        }}</md-table-cell>
+        <md-table-cell md-label="Action">
+          <router-link :to="'/restaurant/' + item._id"
+            ><md-button class="md-raised">
+              Détail d'un restaurant</md-button
+            ></router-link
+          >
+        </md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -195,5 +216,11 @@ export default {
 <style scoped>
 h1 {
   background-color: yellow;
+}
+.ajoutResto {
+  display: inline-block;
+}
+.espaceAjoutResto {
+  margin-right: 1%;
 }
 </style>
