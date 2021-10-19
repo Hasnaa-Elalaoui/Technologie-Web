@@ -63,15 +63,28 @@
     </v-sheet>
   </v-card>
     <form v-on:submit.prevent="ajouterRestaurant(event)">
-      <label>
-        Nom : <input name="nom" type="text" required v-model="nom" />
+      <label class="espaceAjoutResto">
+        Nom :
+        <v-text-field
+          class="ajoutResto"
+          v-model="nom"
+          label="Saisir le nom du restaurant"
+          outlined
+          clearable
+        ></v-text-field>
       </label>
-      <label>
+      <label class="espaceAjoutResto">
         Cuisine :
-        <input name="cuisine" type="text" required v-model="cuisine" />
+        <v-text-field
+          class="ajoutResto"
+          v-model="cuisine"
+          label="Saisir la cuisine"
+          outlined
+          clearable
+        ></v-text-field>
       </label>
 
-      <button>Ajouter</button>
+      <md-button class="md-raised"> Ajouter </md-button>
     </form>
 
     <h1>Nombre de restaurants : {{ nbRestaurantsTotal }}</h1>
@@ -127,7 +140,10 @@
         }}</md-table-cell>
         <md-table-cell md-label="Action">
           <router-link :to="'/restaurant/' + item._id"
-            >[Détail d'un restaurant]</router-link
+
+            ><md-button class="md-raised">
+              Détail d'un restaurant</md-button
+            ></router-link
           >
         </md-table-cell>
       </md-table-row>
@@ -272,6 +288,7 @@ export default {
 h1 {
   background-color: yellow;
 }
+
 .title{
   font-size: 2%;
 }
@@ -286,5 +303,11 @@ h1 {
 
 .search-button{
   margin-top: 0%;
+}
+.ajoutResto {
+  display: inline-block;
+}
+.espaceAjoutResto {
+  margin-right: 1%;
 }
 </style>
