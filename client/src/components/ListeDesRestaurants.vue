@@ -1,4 +1,5 @@
 <template>
+<!-- Début bannière -->
   <div>
     <v-navigation-drawer v-model="drawer" absolute bottom temporary height="100%">
       <v-list nav dense>
