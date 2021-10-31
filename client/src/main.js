@@ -19,6 +19,10 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
+      redirect: '/restaurants',
+    },
+    {
+      path: '/restaurants',
       component: ListeDesRestaurants
     },
     {
@@ -29,7 +33,7 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/restaurant/:id',
+      path: '/restaurants/:id',
       component: Restaurant
     }
   ],
