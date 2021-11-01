@@ -7,8 +7,8 @@
                 </v-btn>
             </router-link>
         </div>
-
-        <v-card :loading="loading" class="mx-auto my-12" width="80%" outlined flat>
+        <div class="fd-flex flex-column">
+        <v-card :loading="loading" class="mx-auto my-12" width="50%" outlined flat>
 
             <v-img height="250" src="https://source.unsplash.com/collection/190727" max-height="20%"></v-img>
 
@@ -16,10 +16,10 @@
 
             <v-card-text>
                 <v-row align="center" class="mx-0">
-                    <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
+                    <v-rating :value=getRandomInt(max) color="amber" dense half-increments readonly size="14"></v-rating>
 
                     <div class="grey--text ms-4">
-                        4.5 (413)
+                        {{this.note}} (413)
                     </div>
                 </v-row>
 
@@ -99,6 +99,8 @@
                 </v-row>
             </v-card-actions>
         </v-card>
+        
+        </div>
 
     </div>
 
@@ -120,6 +122,8 @@
                 loading: false,
                 selection: 1,
                 dialog: false,
+                max:5,
+                note:0,
             }
         },
         methods: {
@@ -127,7 +131,11 @@
                 this.loading = true
 
                 setTimeout(() => (this.loading = false), 2000)
-            }
+            },
+            getRandomInt(max) {
+                this.note = Math.floor(Math.random() * max);
+                return this.note;
+            },
         },
         mounted() {
             console.log("ID = " + this.id);
@@ -148,5 +156,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+    #map { height: 180px; }
 </style>
