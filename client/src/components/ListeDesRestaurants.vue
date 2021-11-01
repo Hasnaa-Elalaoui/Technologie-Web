@@ -85,7 +85,7 @@
             <div class="ml-5" style="width: 60%">
               <p class="mb-3">Recherche par nom :</p>
               <div >
-                <v-text-field @input="chercherRestaurant()" v-model="nomRestauRecherche" outlined clearable />
+                <v-text-field @input="chercherRestaurant()" v-model="nomRestauRecherche" outlined clearable/>
               </div>
             </div>
             <!-- Slider -->
@@ -139,8 +139,8 @@
               </md-table-cell>
             </md-table-row>
 
-            <md-table-empty-state md-label="No restaurant found"
-              :md-description="`No restaurant found for this '${nomRestauRecherche}' query. Try a different search term or create a new restaurant.`">
+            <md-table-empty-state md-label="Aucun résultat trouvé"
+              :md-description="`Ce nom '${nomRestauRecherche}' ne correspond à aucun résultat. Essayez un autre nom ou créez le restaurant associé.`">
               <div class="d-flex justify-self-center">
 
                 <v-dialog v-model="dialog" width="450">
@@ -240,7 +240,7 @@
         let url = "http://localhost:8080/api/restaurants?";
         url += "page=" + this.page;
         url += "&pagesize=" + this.pageSize;
-        url += "&name=" + this.nomRestauRecherche;
+        if(this.nomRestauRecherche != null) url += "&name=" + this.nomRestauRecherche;
         console.log(url);
         fetch(url)
           .then((responseJSON) => {

@@ -7,50 +7,47 @@
                 </v-btn>
             </router-link>
         </div>
-        <div class="fd-flex flex-column">
-        <v-card :loading="loading" class="mx-auto my-12" width="50%" outlined flat>
+        <div class="card-container">
+            <v-card :loading="loading" width="50%" height="100%" outlined flat>
 
-            <v-img height="250" src="https://source.unsplash.com/collection/190727" max-height="20%"></v-img>
+                <v-img height="250" src="https://source.unsplash.com/collection/190727" max-height="20%"></v-img>
 
-            <v-card-title>{{restaurant.name}}</v-card-title>
+                <v-card-title>{{restaurant.name}}</v-card-title>
 
-            <v-card-text>
-                <v-row align="center" class="mx-0">
-                    <v-rating :value=getRandomInt(max) color="amber" dense half-increments readonly size="14"></v-rating>
+                <v-card-text>
+                    <v-row align="center" class="mx-0">
+                        <v-rating :value=getRandomInt(max) color="amber" dense half-increments readonly size="14">
+                        </v-rating>
 
-                    <div class="grey--text ms-4">
-                        {{this.note}} (413)
+                        <div class="grey--text ms-4">
+                            {{this.note}} (413)
+                        </div>
+                    </v-row>
+
+                    <div class="my-4 text-subtitle-1">
+                        {{restaurant.cuisine}}
                     </div>
-                </v-row>
 
-                <div class="my-4 text-subtitle-1">
-                    {{restaurant.cuisine}}
-                </div>
+                    <div>
+                        La meilleure spécialité {{restaurant.cuisine}} de {{restaurant.borough}}
+                    </div>
+                </v-card-text>
 
-                <div>
-                    La meilleure spécialité {{restaurant.cuisine}} de {{restaurant.borough}}
-                </div>
-            </v-card-text>
+                <v-divider class="mx-4"></v-divider>
 
-            <v-divider class="mx-4"></v-divider>
+                <v-card-title>Horaires de réservation disponibles</v-card-title>
 
-            <v-card-title>Horaires de réservation disponibles</v-card-title>
+                <v-card-text>
+                    <v-chip-group v-model="selection" active-class="primary accent-4 white--text" column>
+                        <v-chip>18:30</v-chip>
+                        <v-chip>19:30</v-chip>
+                        <v-chip>20:00</v-chip>
+                        <v-chip>21:00</v-chip>
+                    </v-chip-group>
+                </v-card-text>
 
-            <v-card-text>
-                <v-chip-group v-model="selection" active-class="primary accent-4 white--text" column>
-                    <v-chip>18:30</v-chip>
-                    <v-chip>19:30</v-chip>
-                    <v-chip>20:00</v-chip>
-                    <v-chip>21:00</v-chip>
-                </v-chip-group>
-            </v-card-text>
-
-            <v-card-actions>
-                <v-btn color="primary lighten-2" text @click="reserve">
-
-                </v-btn>
-                <v-row>
-                    <v-dialog v-model="dialog" persistent max-width="600px">
+                <v-card-actions>
+                    <v-dialog v-model="dialog" persistent max-width="800px">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn color="primary" dark v-bind="attrs" v-on="on">
                                 Réserver
@@ -63,27 +60,33 @@
                             <v-card-text>
                                 <v-container>
                                     <v-row>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field label="Nom*" required></v-text-field>
-                                        </v-col>
+                                        
+                                            <v-col cols="12" sm="5" md="6">
+                                                <v-text-field label="Nom*" required></v-text-field>
+                                            </v-col>
 
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field label="Prénom*" persistent-hint required>
-                                            </v-text-field>
-                                        </v-col>
-                                        <v-col cols="12">
-                                            <v-text-field label="Email"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12">
-                                            <v-text-field label="Téléphone*" required></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6">
-                                            <v-select :items="['1', '2', '3', '4', '5', '6', '7', '8']" label="Nombre de personnes*" required>
-                                            </v-select>
-                                        </v-col>
+                                            <v-col cols="12" sm="6" md="6">
+                                                <v-text-field label="Prénom*" persistent-hint required>
+                                                </v-text-field>
+                                            </v-col>
+                                        
+                                            <v-col cols="12">
+                                                <v-text-field label="Email"></v-text-field>
+                                            </v-col>
+                                       
+                                            <v-col cols="12">
+                                                <v-text-field label="Téléphone*" required></v-text-field>
+                                            </v-col>
+                                        
+                                            <v-col cols="12" sm="6">
+                                                <v-select :items="['1', '2', '3', '4', '5', '6', '7', '8']"
+                                                    label="Nombre de personnes*" required>
+                                                </v-select>
+                                            </v-col>
+                                        
                                     </v-row>
                                 </v-container>
-                                <small>*champs nécessaires</small>
+                                <small>*champs obligatoires</small>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -96,20 +99,22 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
-                </v-row>
-            </v-card-actions>
-        </v-card>
-        
+                </v-card-actions>
+            </v-card>
+            <div class="my-map"><Map /></div>
         </div>
-
     </div>
 
 </template>
 
 <script>
+    import Map from './Map.vue'
     export default {
         name: 'Restaurant',
         props: {},
+        components: {
+            Map
+        },
         computed: {
             id() {
                 return this.$route.params.id;
@@ -122,8 +127,8 @@
                 loading: false,
                 selection: 1,
                 dialog: false,
-                max:5,
-                note:0,
+                max: 5,
+                note: 1,
             }
         },
         methods: {
@@ -134,6 +139,7 @@
             },
             getRandomInt(max) {
                 this.note = Math.floor(Math.random() * max);
+                if (this.note == 0) this.note++;
                 return this.note;
             },
         },
@@ -156,5 +162,17 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    #map { height: 180px; }
+    .my-map {
+        height: 600px;
+        width: 436px;
+    }
+
+    .card-container {
+        width: 100vw;
+        min-width: 100vw;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 </style>
