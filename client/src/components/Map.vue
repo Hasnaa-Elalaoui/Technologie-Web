@@ -1,76 +1,73 @@
 <template>
- <l-map
-   :center="center"
-   :zoom="zoom"
-   class="map"
-   ref="map"
-   @update:zoom="zoomUpdated"
-   @update:center="centerUpdated"
- >
-   <l-tile-layer
-     :url="url"
-   >
-   </l-tile-layer>
-   <l-marker
- :key="marker.id"
- :lat-lng="marker.coordinates"
->
-<l-icon ref="icon">
-     <img src="@/assets/pin.png"/>
-   </l-icon>
-</l-marker>
-   </l-map>
+    <l-map :center="center" :zoom="zoom" class="map" ref="map" @update:zoom="zoomUpdated"
+        @update:center="centerUpdated">
+        <l-tile-layer :url="url">
+        </l-tile-layer>
+        <l-marker :key="marker.id" :lat-lng="marker.coordinates">
+            <l-icon ref="icon">
+                <img src="@/assets/pin.png" />
+            </l-icon>
+        </l-marker>
+    </l-map>
 </template>
 
 <script>
-import 'leaflet/dist/leaflet.css';
-import { LMap, LTileLayer, LMarker, LIcon } from 'vue2-leaflet';
+    import 'leaflet/dist/leaflet.css';
+    import {
+        LMap,
+        LTileLayer,
+        LMarker,
+        LIcon
+    } from 'vue2-leaflet';
 
-export default {
-    name: "Map",
- components: {
-   LMap,
-   LTileLayer,
-   LMarker,
-   LIcon,
- },
- data () {
-   return {
-     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-     center:  [49.114910, 6.178810 ],
-     zoom: 15,
-     marker: {id: 1, coordinates: [ 49.114910, 6.178810 ]},
-   }
- },
- methods: {
-   zoomUpdated (zoom) {
-     this.zoom = zoom;
-     console.log(this.markers)
-   },
-   centerUpdated (center) {
-     this.center = center;
-   },
-   getRandomInRange(from, to, fixed) {
-        return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+    export default {
+        name: "Map",
+        components: {
+            LMap,
+            LTileLayer,
+            LMarker,
+            LIcon,
+        },
+        data() {
+            return {
+                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                center: [49.114910, 6.178810],
+                zoom: 15,
+                marker: {
+                    id: 1,
+                    coordinates: [49.114910, 6.178810]
+                },
+            }
+        },
+        methods: {
+            zoomUpdated(zoom) {
+                this.zoom = zoom;
+                console.log(this.markers)
+            },
+            centerUpdated(center) {
+                this.center = center;
+            },
+            getRandomInRange(from, to, fixed) {
+                return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+            }
+        },
+        created() {
+            let posLong = this.getRandomInRange(49.160905, 43.688287, 6)
+            let posLat = this.getRandomInRange(-1.248320, 7.307840, 6)
+
+            let coord = [posLong, posLat]
+
+            this.marker.coordinates = coord
+            this.center = coord
+        }
     }
- },
- created(){
-     let posLong = this.getRandomInRange(49.160905, 43.688287, 6)
-     let posLat = this.getRandomInRange(-1.248320, 7.307840, 6)
-
-     let coord = [posLong, posLat]
-
-     this.marker.coordinates = coord
-     this.center = coord
- }
-}
 </script>
 
 <style>
- .map {
-    position: relative;
-   width: 100%;
-   height: 100%;
-   z-index: 0;
- }
+    .map {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
 </style>

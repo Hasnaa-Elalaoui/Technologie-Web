@@ -1,18 +1,32 @@
 <template>
 <!-- Début bannière -->
   <div>
-    <v-navigation-drawer v-model="drawer" absolute bottom temporary height="100%">
-      <v-list nav dense>
-        <v-list-item-group active-class="primary--text text--accent-4" >
-          <v-list-item>
-           <v-dialog v-model="dialog" width="450">
+    <div>
+      <div class="d-flex justify-center ma-3">
+        <v-card class="d-flex flex-column" outlined width="90%">
+          <div class="text-overline ma-5">
+            FILTRES
+          </div>
+          <div>
+            <div class="ml-5" style="width: 60%">
+              <p class="mb-3">Recherche par nom :</p>
+              <div >
+                <v-text-field @input="chercherRestaurant()" v-model="nomRestauRecherche" outlined clearable/>
+              </div>
+            </div>
+            <!-- Slider -->
+            <p class="ml-5">
+              Nombre de restaurants par page:
+              <input @change="getRestaurantsFromServer()" type="range" min="2" max="1000"
+                v-model="pageSize" />{{ pageSize }}
+            </p>
+            
+            <v-dialog v-model="dialog" width="450">
                   <template v-slot:activator="{ on, attrs }">
-                    <v-list-item-title color="primary" dark v-bind="attrs" v-on="on" >
+                    <v-btn class="ma-4" color="primary" dark v-bind="attrs" v-on="on">
                       Ajouter un restaurant
-                    </v-list-item-title>
-                    <v-list-item-icon>
                       <v-icon>add</v-icon>
-                    </v-list-item-icon>
+                    </v-btn>
                   </template>
 
                   <v-card>
@@ -52,48 +66,7 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
-            
-          </v-list-item>
-
-          <v-divider></v-divider>
-
-          <v-list-item>
-            <v-list-item-title>Tous les restaurants</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Par catégories</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Par ville</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-
-    </v-navigation-drawer>
-    <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-    
-    <div>
-      <div class="d-flex justify-center">
-        <v-card class="d-flex flex-column" outlined width="90%">
-          <div class="text-overline ma-5">
-            FILTRES
-          </div>
-          <div>
-            <div class="ml-5" style="width: 60%">
-              <p class="mb-3">Recherche par nom :</p>
-              <div >
-                <v-text-field @input="chercherRestaurant()" v-model="nomRestauRecherche" outlined clearable/>
-              </div>
-            </div>
-            <!-- Slider -->
-            <p class="ml-5">
-              Nombre de restaurants par page:
-              <input @change="getRestaurantsFromServer()" type="range" min="2" max="1000"
-                v-model="pageSize" />{{ pageSize }}
-            </p>
+                
           </div>
           <div class="d-flex justify-end mr-5">
             <div class="d-flex flex-column">
@@ -375,5 +348,10 @@
 
   .espaceAjoutResto {
     margin-right: 1%;
+  }
+
+  .ajouterRestau{
+    flex:20%;
+    overflow: hidden;
   }
 </style>
