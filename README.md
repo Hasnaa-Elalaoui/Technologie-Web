@@ -36,18 +36,19 @@ Finalement, le terminal vous renseignera ainsi le lien local à ouvrir depuis le
 
 ## Auteurs
 
-Listez le(s) auteur(s) du projet ici !
 * **Hasnaa Elalaoui** _alias_ [Hasnaa-Elalaoui](https://github.com/Hasnaa-Elalaoui)
 * **Axel Jean--Petez** _alias_ [zetep0](https://github.com/zetep0)
 
-## Liens dont nous nous sommes inspirés
+## Bibliographie
 
 En plus des liens de documentation officielle mentionnés ci-dessus, nous avons eu recours à d'autres ressources : 
-* Pour instancier et paramétrer les coordonnées de la carte : 
-https://www.nicolaskempf.fr/creez-vos-cartes-interactives-avec-vuejs-et-leaflet/
-https://vue2-leaflet.netlify.app/quickstart/#hello-map
-https://stackoverflow.com/questions/6878761/javascript-how-to-create-random-longitude-and-latitudes
-* Pour la tentative de déploiement du site sur Github Pages :
-https://medium.com/swlh/deploy-vue-app-to-github-pages-2ada48d7397e
-* Pour résoudre la majorité des bugs rencontrés :
-https://stackoverflow.com/
+* Pour instancier et paramétrer les coordonnées de la carte : <br/>
+https://www.nicolaskempf.fr/creez-vos-cartes-interactives-avec-vuejs-et-leaflet/ <br/>
+https://vue2-leaflet.netlify.app/quickstart/#hello-map <br/>
+https://stackoverflow.com/questions/6878761/javascript-how-to-create-random-longitude-and-latitudes <br/>
+* Pour la tentative de déploiement du site sur Github Pages : <br/>
+https://medium.com/swlh/deploy-vue-app-to-github-pages-2ada48d7397e <br/>
+* Pour résoudre la majorité des bugs rencontrés : <br/>
+https://stackoverflow.com/ <br/>
+* Pour la réalisation du README : <br/>
+https://gist.github.com/JulienRAVIA/1cc6589cbf880d380a5bb574baa38811
