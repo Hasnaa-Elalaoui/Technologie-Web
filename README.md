@@ -1,4 +1,4 @@
-# Projet : Technologie-Web
+# Revue Restaurants
 
 Ce projet a été réalisé dans le cadre d'un devoir scolaire. Il a pour but de modéliser un site web permettant de visualiser une liste de restaurants. 
 Chaque restaurant comporte des détails le concernant ainsi que sa localisation GPS sur une carte.
