@@ -4,7 +4,6 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import VueRouter from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import ListeDesRestaurants from './components/ListeDesRestaurants.vue'
 import Restaurant from './components/Restaurant.vue'
 import vuetify from './plugins/vuetify'
@@ -26,14 +25,7 @@ const router = new VueRouter({
       component: ListeDesRestaurants
     },
     {
-      path: '/hello',
-      component: HelloWorld,
-      props: {
-        msg: "Coucou la Miage"
-      }
-    },
-    {
-      path: '/restaurants/:id',
+      path: '/RestaurantDetail/',
       component: Restaurant
     }
   ],

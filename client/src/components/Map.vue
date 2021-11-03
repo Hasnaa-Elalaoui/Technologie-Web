@@ -22,6 +22,9 @@
 
     export default {
         name: "Map",
+        props: {
+            coordonnees : []
+        },
         components: {
             LMap,
             LTileLayer,
@@ -47,13 +50,10 @@
             centerUpdated(center) {
                 this.center = center;
             },
-            getRandomInRange(from, to, fixed) {
-                return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
-            }
         },
         created() {
-            let posLong = this.getRandomInRange(49.160905, 43.688287, 6)
-            let posLat = this.getRandomInRange(-1.248320, 7.307840, 6)
+            let posLong = this.coordonnees[1]
+            let posLat = this.coordonnees[0]
 
             let coord = [posLong, posLat]
 

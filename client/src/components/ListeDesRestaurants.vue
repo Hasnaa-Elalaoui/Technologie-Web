@@ -104,7 +104,7 @@
               <md-table-cell md-label="Cuisine" md-sort-by="cuisine">{{item.cuisine}}</md-table-cell>
               <md-table-cell md-label="Ville" md-sort-by="borough">{{item.borough}}</md-table-cell>
               <md-table-cell md-label="Action">
-                <router-link :to="'/restaurants/' + item._id">
+                <router-link :to="{ path: 'RestaurantDetail', query: { id: item._id }}">
                   <md-button class="md-raised">
                     Détail d'un restaurant
                   </md-button>

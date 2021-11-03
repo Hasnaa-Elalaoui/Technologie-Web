@@ -16,7 +16,7 @@
 
                 <v-card-text>
                     <v-row align="center" class="mx-0">
-                        <v-rating :value=getRandomInt(max) color="amber" dense half-increments readonly size="14">
+                        <v-rating :value="this.note" color="amber" dense half-increments readonly size="14">
                         </v-rating>
 
                         <div class="grey--text ms-4">
@@ -131,7 +131,7 @@
                     </v-dialog>
                 </v-card-actions>
             </v-card>
-            <div class="my-map"><Map /></div>
+            <div class="my-map"><Map :coordonnees="this.restaurant.address.coord" /></div>
         </div>
     </div>
 
@@ -147,7 +147,7 @@
         },
         computed: {
             id() {
-                return this.$route.params.id;
+                return this.$route.query.id;
             }
         },
         data: function () {
@@ -181,12 +181,13 @@
                 .then(response => {
                     return response.json();
                 }).then(data => {
-                    console.log(data.restaurant.name)
+                    console.log(data.restaurant)
                     this.restaurant = data.restaurant;
                 }).catch(err => {
                     console.log(err)
                     this.$router.push('/')
-                })
+                });
+            this.getRandomInt(this.max)
         }
     }
 </script>

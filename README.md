@@ -26,6 +26,17 @@ Ensuite, ouvrez un nouveau terminal puis lancez le client en vous plaçant à la
 
 Finalement, le terminal vous renseignera ainsi le lien local à ouvrir depuis le navigateur de votre choix. 
 
+## Description de la solution
+
+Ce projet comporte 2 pages : 
+* L'accueil ou page principale: </br>
+Définie par le composant ListeDesRestaurants, cette page a pour but d'afficher une liste de restaurants récupérés depuis la base de données. Grâce à la md-table de la librairie graphique Material Design, cet affichage se veut ergonomique et concis à travers un tableau comportant le nom du restaurant, son type de cuisine, la ville où il se situe ainsi qu'un bouton "Détail d'un restaurant" menant vers la seconde page.</br>
+Cette page d'accueil comporte également un champ de recherche ainsi que des informations sur l'affichage (nombre de pages, nombre de restaurants par page, etc..). Lorsque l'utilisateur tentera de rechercher le nom d'un restaurant ne figurant pas dans la base de donnée, un message s'affichera le redirigeant vers l'ajout d'un nouveau restaurant s'il le souhaite. 
+* Le détail d'un restaurant : </br>
+Définie par le composant Restaurant, cette page a pour but d'afficher des informations supplémentaires comme la note attribuée, les horaires de réservation disponible ainsi qu'un formulaire à remplir pour la réservation. Via la v-card de la librairie graphique Vuetify, une image choisie aléatoirement à partir d'une librairie va apparaître pour compléter l'affichage du restaurant. </br>
+Finalement, une carte est affichée permettant aux utilisateurs de s'orienter et d'identifier l'endroit exact où se situe le restaurant. Cette carte est affichée grâce à la librairie leaflet qui se base sur l'api OpenStreetMap. 
+
+
 ## Fabriqué avec
 
 * [Vue.js](https://vuejs.org/) - Framework HTML/CSS/JavaScript (front-end)
