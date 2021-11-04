@@ -1,7 +1,7 @@
 <template>
     <div v-if="restaurant">
         <div class="ma-3">
-            <router-link :to="'/restaurants/'">
+            <router-link :to="'/restaurants'">
                 <v-btn class="mx-2" fab dark small color="primary">
                     <v-icon dark>mdi-home</v-icon>
                 </v-btn>
