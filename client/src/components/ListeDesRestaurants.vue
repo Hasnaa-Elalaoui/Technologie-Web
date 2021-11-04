@@ -48,6 +48,11 @@
                         <v-text-field v-model="cuisine" label="Saisir la cuisine" outlined clearable>
                         </v-text-field>
                       </label>
+                      <label>
+                        <p class="mb-3">Ville :</p>
+                        <v-text-field v-model="ville" label="Saisir la ville" outlined clearable>
+                        </v-text-field>
+                      </label>
                     </div>
 
                     <v-divider></v-divider>
@@ -58,8 +63,7 @@
                         Annuler
                       </v-btn>
 
-                      <v-btn color="primary" text @click="dialog = false"
-                        v-on:submit.prevent="ajouterRestaurant(event)">
+                      <v-btn color="primary" text @click="ajouterRestaurant()">
                         Ajouter
                       </v-btn>
 
@@ -157,8 +161,7 @@
                         Annuler
                       </v-btn>
 
-                      <v-btn color="primary" text @click="dialog = false"
-                        v-on:submit.prevent="ajouterRestaurant(event)">
+                      <v-btn color="primary" text @click="ajouterRestaurant">
                         Ajouter
                       </v-btn>
 
@@ -213,7 +216,9 @@
         let url = "http://localhost:8080/api/restaurants?";
         url += "page=" + this.page;
         url += "&pagesize=" + this.pageSize;
-        if(this.nomRestauRecherche != null) url += "&name=" + this.nomRestauRecherche;
+        if(this.nomRestauRecherche != null) {
+          url += "&name=" + this.nomRestauRecherche;
+        }
         console.log(url);
         fetch(url)
           .then((responseJSON) => {
@@ -269,7 +274,7 @@
             console.log(err);
           });
       },
-      ajouterRestaurant(event) {
+      ajouterRestaurant() {
         // eviter le comportement par defaut
         //event.preventDefault();
 
@@ -281,32 +286,46 @@
               ); */
         // Récupération du formulaire. Pas besoin de document.querySelector
         // ou document.getElementById puisque c'est le formulaire qui a généré l'évènement
-        let form = event.target;
+        /* let form = event.target;
+        console.log(form) */
+
+        let form = {
+          name : this.nom,
+          cuisine : this.cuisine,
+          borough : this.ville
+        }
 
         //Récupération des valeurs des champs du formulaire
         // en prévision d'un envoi multipart en ajax/fetch
-        let donneesFormulaire = new FormData(form);
+        /* let donneesFormulaire = new FormData();
+        donneesFormulaire.append("name", this.nom)
+        donneesFormulaire.append("cuisine", this.cuisine)
+        donneesFormulaire.append("borough", this.ville)
+        console.log(donneesFormulaire) */
 
         let url = "http://localhost:8080/api/restaurants";
 
         fetch(url, {
             method: "POST",
-            body: donneesFormulaire,
+            body: JSON.stringify(form),
           })
           .then((responseJSON) => {
             responseJSON.json().then((resJS) => {
               // Maintenant res est un vrai objet JavaScript
               console.log(resJS.msg);
               this.msg = resJS.msg;
+              this.dialog = false; 
               // On rafraîchit la vue
               this.getRestaurantsFromServer();
+              this.nom = "";
+              this.cuisine = "";
+              this.ville = "";
             });
           })
           .catch((err) => {
             console.log(err);
           });
-        this.nom = "";
-        this.cuisine = "";
+        
       },
       chercherRestaurant: _.debounce(function () {
         // Appelée que si on n'a pas tapé de touches pendant un certain délai
